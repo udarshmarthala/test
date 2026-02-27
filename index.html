@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>RouteForge — Free Navigation</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  </head>
+  <body>
+    <div id="app">
+      <div id="sidebar">
+        <div id="brand">
+          <div id="brand-icon">◈</div>
+          <div id="brand-text">
+            <span id="brand-name">RouteForge</span>
+            <span id="brand-tagline">Free · Open · Fast</span>
+          </div>
+        </div>
+
+        <div id="search-panel">
+          <div class="input-group" id="origin-group">
+            <label class="input-label">
+              <span class="dot origin-dot"></span>
+              FROM
+            </label>
+            <div class="input-wrapper">
+              <input type="text" id="origin-input" placeholder="Start location..." autocomplete="off" />
+              <button class="locate-btn" id="locate-btn" title="Use my location">⊕</button>
+            </div>
+            <div class="suggestions" id="origin-suggestions"></div>
+          </div>
+
+          <div class="route-connector">
+            <div class="connector-line"></div>
+            <button id="swap-btn" title="Swap origin and destination">⇅</button>
+          </div>
+
+          <div class="input-group" id="dest-group">
+            <label class="input-label">
+              <span class="dot dest-dot"></span>
+              TO
+            </label>
+            <div class="input-wrapper">
+              <input type="text" id="dest-input" placeholder="Destination..." autocomplete="off" />
+            </div>
+            <div class="suggestions" id="dest-suggestions"></div>
+          </div>
+
+          <div id="travel-modes">
+            <button class="mode-btn active" data-mode="driving-car" title="Drive">
+              <span>🚗</span><span>Drive</span>
+            </button>
+            <button class="mode-btn" data-mode="cycling-regular" title="Cycle">
+              <span>🚲</span><span>Cycle</span>
+            </button>
+            <button class="mode-btn" data-mode="foot-walking" title="Walk">
+              <span>🚶</span><span>Walk</span>
+            </button>
+          </div>
+
+          <div id="api-key-section">
+            <label class="input-label" style="margin-bottom:6px;display:block">
+              ORS API KEY
+              <a href="https://openrouteservice.org/dev/#/signup" target="_blank" id="get-key-link">Get free key →</a>
+            </label>
+            <input type="text" id="api-key-input" placeholder="Paste your free ORS API key..." autocomplete="off" />
+            <div id="api-key-status"></div>
+          </div>
+
+          <button id="route-btn" disabled>
+            <span id="route-btn-text">CALCULATE ROUTE</span>
+            <span id="route-btn-loader" class="hidden">CALCULATING...</span>
+          </button>
+        </div>
+
+        <div id="route-info" class="hidden">
+          <div id="route-stats">
+            <div class="stat-card">
+              <div class="stat-value" id="stat-distance">—</div>
+              <div class="stat-label">Distance</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-value" id="stat-duration">—</div>
+              <div class="stat-label">Duration</div>
+            </div>
+          </div>
+          <div id="steps-container">
+            <div id="steps-header">
+              <span>TURN-BY-TURN</span>
+              <span id="steps-count"></span>
+            </div>
+            <ol id="steps-list"></ol>
+          </div>
+        </div>
+
+        <div id="sidebar-footer">
+          Powered by <a href="https://leafletjs.com" target="_blank">Leaflet</a> ·
+          <a href="https://openrouteservice.org" target="_blank">ORS</a> ·
+          <a href="https://nominatim.org" target="_blank">Nominatim</a>
+        </div>
+      </div>
+
+      <div id="map-container">
+        <div id="map"></div>
+        <div id="map-overlay-top">
+          <div id="toggle-sidebar-btn" title="Toggle sidebar">◧</div>
+          <div id="attribution-badge">100% Free APIs</div>
+        </div>
+        <div id="error-toast" class="hidden">
+          <span id="error-msg"></span>
+          <button id="error-close">✕</button>
+        </div>
+      </div>
+    </div>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
