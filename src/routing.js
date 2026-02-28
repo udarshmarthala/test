@@ -5,6 +5,13 @@ const ORS_BASE = 'https://api.openrouteservice.org';
 
 export async function getRoute(apiKey, origin, destination, profile = 'driving-car') {
   const url = `${ORS_BASE}/v2/directions/${profile}`;
+  
+  // Build avoid_features based on profile
+  const avoidFeatures = ['steps', 'ferries'];
+  if (profile === 'driving-car') {
+    avoidFeatures.push('highways');
+  }
+  
   const body = {
     coordinates: [
       [origin.lon, origin.lat],
@@ -13,6 +20,9 @@ export async function getRoute(apiKey, origin, destination, profile = 'driving-c
     instructions: true,
     language: 'en',
     units: 'mi',
+    options: {
+      avoid_features: avoidFeatures,
+    },
   };
 
   const res = await fetch(url, {

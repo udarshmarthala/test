@@ -62,6 +62,18 @@
             </button>
           </div>
 
+          <button id="live-tracking-btn" class="live-tracking-btn" title="Enable live location tracking">
+            ⊕ Live
+          </button>
+
+          <div id="coordinates-display" class="coordinates-display hidden">
+            <div class="coord-label">Your Location</div>
+            <div class="coord-value">
+              <div class="coord-line"><span class="coord-tag">LAT</span> <span id="coord-lat">—</span></div>
+              <div class="coord-line"><span class="coord-tag">LON</span> <span id="coord-lon">—</span></div>
+            </div>
+          </div>
+
           <div id="api-key-section">
             <label class="input-label" style="margin-bottom:6px;display:block">
               ORS API KEY
@@ -88,6 +100,12 @@
               <div class="stat-label">Duration</div>
             </div>
           </div>
+          
+          <button id="start-navigation-btn" class="start-nav-btn hidden">
+            <span class="nav-icon">▶</span>
+            <span>START NAVIGATION</span>
+          </button>
+          
           <div id="steps-container">
             <div id="steps-header">
               <span>TURN-BY-TURN</span>
@@ -110,6 +128,30 @@
           <div id="toggle-sidebar-btn" title="Toggle sidebar">◧</div>
           <div id="attribution-badge">100% Free APIs</div>
         </div>
+
+        <!-- Navigation Panel (shown during active navigation) -->
+        <div id="navigation-panel" class="hidden">
+          <div id="nav-progress">
+            <div id="nav-progress-bar"></div>
+          </div>
+          <div id="nav-content">
+            <div id="nav-step-counter">
+              <span id="nav-current-step">1</span> / <span id="nav-total-steps">10</span>
+            </div>
+            <div id="nav-next-instruction">
+              <div id="nav-arrow">⬆</div>
+              <div id="nav-text">
+                <div id="nav-instruction">Heading up Main Street</div>
+                <div id="nav-distance-to-next">2.1 mi to next turn</div>
+              </div>
+            </div>
+          </div>
+          <div id="nav-upcoming">
+            <div id="nav-upcoming-label">Next:</div>
+            <div id="nav-upcoming-instruction">Turn right onto Oak Avenue</div>
+          </div>
+        </div>
+
         <div id="error-toast" class="hidden">
           <span id="error-msg"></span>
           <button id="error-close">✕</button>
